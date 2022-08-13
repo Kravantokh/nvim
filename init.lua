@@ -23,6 +23,11 @@ vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
 -- Unfold everything by default
 vim.api.nvim_command('set foldlevelstart=20')
 
+vim.api.nvim_command('set relativenumber')
+vim.api.nvim_command('set number')
+
+
+
 
 
 require('packer').startup(function()
@@ -51,7 +56,10 @@ require('packer').startup(function()
 	use 'neovim/nvim-lspconfig'
 	
 	-- Autocomplete menu
-	use 'neoclide/coc.nvim'
+	use 'hrsh7th/nvim-cmp' -- Autocompletion plugin
+	use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
+	use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
+	use 'L3MON4D3/LuaSnip' -- Snippets plugin
 end)
 
  -- theme setup
@@ -84,44 +92,62 @@ require('nvim-treesitter.configs').setup {
 -- Language server setup
 require'lspconfig'.clangd.setup{}
 
--- Mappings.
--- See `:help vim.diagnostic.*` for documentation on any of the below functions
-local opts = { noremap=true, silent=true }
-vim.keymap.set('n', '<space>e', vim.diagnostic.open_float, opts)
-vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-vim.keymap.set('n', '<space>q', vim.diagnostic.setloclist, opts)
+-- Autocomplete config
+local luasnip = require 'luasnip'
+-- nvim-cmp
+local cmp = require 'cmp'
 
--- Mappings.
--- See `:help vim.lsp.*` for documentation on any of the below functions
-local bufopts = { noremap=true, silent=true, buffer=bufnr }
-	vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
-	vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
-	vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
-	vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
-	vim.keymap.set('n', '<C-k>', vim.lsp.buf.signature_help, bufopts)
-	vim.keymap.set('n', '<space>wa', vim.lsp.buf.add_workspace_folder, bufopts)
-	vim.keymap.set('n', '<space>wr', vim.lsp.buf.remove_workspace_folder, bufopts)
-	vim.keymap.set('n', '<space>wl', function()
-	print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-end, bufopts)
-	vim.keymap.set('n', '<space>D', vim.lsp.buf.type_definition, bufopts)
-	vim.keymap.set('n', '<space>rn', vim.lsp.buf.rename, bufopts)
-	vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
-	vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
-	vim.keymap.set('n', '<space>f', vim.lsp.buf.formatting, bufopts)
-
-local lsp_flags = {
--- This is the default in Nvim 0.7+
-	debounce_text_changes = 150,
+cmp.setup {
+	snippet = {
+		expand = function(args)
+		require('luasnip').lsp_expand(args.body)
+	end,
+	},
+	mapping = {
+		['<C-p>'] = cmp.mapping.select_prev_item(),
+		['<C-n>'] = cmp.mapping.select_next_item(),
+		['<C-d>'] = cmp.mapping.scroll_docs(-4),
+		['<C-f>'] = cmp.mapping.scroll_docs(4),
+		['<C-Space>'] = cmp.mapping.complete(),
+		['<C-e>'] = cmp.mapping.close(),
+		['<CR>'] = cmp.mapping.confirm {
+			behavior = cmp.ConfirmBehavior.Replace,
+			select = true,
+		},
+		['<Tab>'] = function(fallback)
+			if cmp.visible() then
+				cmp.select_next_item()
+			elseif luasnip.expand_or_jumpable() then
+				luasnip.expand_or_jump()
+			else
+				fallback()
+			end
+		end,
+		['<S-Tab>'] = function(fallback)
+			if cmp.visible() then
+				cmp.select_prev_item()
+			elseif luasnip.jumpable(-1) then
+				luasnip.jump(-1)
+			else
+				fallback()
+			end
+		end,
+	},
+	sources = {
+		{ name = 'nvim_lsp' },
+		{ name = 'luasnip' },
+	},
 }
 
-
- -- Mapping F1 to file manager open and close
+-- Mapping F1 to file manager open and close
 vim.api.nvim_set_keymap('n', '<F1>', ':NvimTreeToggle<ENTER>', { noremap = true, silent = true })
 
  -- Mapping F2 to toggling automatic session saving (provided by vim-obsession)
 vim.api.nvim_set_keymap('n', '<F2>', ':Obsession<ENTER>', { noremap = true, silent = true })
+
+ -- Mapping F3 to error fixing when fix available
+vim.api.nvim_set_keymap('n', '<F3>', ':lua vim.lsp.buf.code_action()<ENTER>', { noremap = true, silent = true })
+
 
 -- Mapping F5 to run the compile script in the opened folder according to the platform
 if vim.fn.has('unix') == 1 then
@@ -140,4 +166,7 @@ elseif vim.fn.has('win32') == 1 then
 	vim.api.nvim_set_keymap('n', '<F6>', ':!.\\run.bat & exit<CR>', { noremap = true, silent = true })	
 
 end
+
+
+
 
