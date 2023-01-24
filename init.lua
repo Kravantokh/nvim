@@ -17,8 +17,8 @@ vim.api.nvim_command('set number')
 vim.api.nvim_command('set number')
 
 -- Enable treesitter based folding
-vim.api.nvim_command('set foldmethod=expr')
-vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
+--vim.api.nvim_command('set foldmethod=expr')
+--vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
 
 -- Unfold everything by default
 vim.api.nvim_command('set foldlevelstart=20')
@@ -50,7 +50,7 @@ require('packer').startup(function()
 	}
 
 	-- treesitter
-	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	--use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	
 	-- session manager
 	use('tpope/vim-obsession')
@@ -90,13 +90,13 @@ require('nvim-web-devicons').setup {
 	default = true;
 }
  -- tresitter config
-require('nvim-treesitter.configs').setup {
-	highlight = {
-		enable = true,
-		additional_vim_regex_highlighting = false,
-		ensure_installed = { "c", "cpp", "lua", "rust" },
-	}
-}
+-- require('nvim-treesitter.configs').setup {
+-- 	highlight = {
+-- 		enable = true,
+-- 		additional_vim_regex_highlighting = false,
+-- 		ensure_installed = { "c", "cpp", "lua", "rust" },
+-- 	}
+-- }
 
 -- Language server setup
 require'lspconfig'.clangd.setup{}
@@ -185,6 +185,39 @@ cmp.setup {
 		{ name = 'luasnip' },
 	},
 }
+
+-- Transparency config
+require("transparent").setup({
+	enable = true,
+	extra_groups = {
+		"NvimTreeNormal",
+		"NvimTreeNormalNC",
+		"NvimTreeStatusLine",
+		"NvimTreeStatusLineNC",
+		"Normal",
+		"NormalNC",
+		"Comment",
+		"Constant",
+		"Special",
+		"Identifier",
+		"Statement",
+		"PreProc",
+		"Type",
+		"Underlined",
+		"Todo",
+		"String",
+		"Function",
+		"Conditional",
+		"Repeat",
+		"Operator",
+		"Structure",
+		"LineNr",
+		"NonText",
+		"SignColumn",
+		"CursorLineNr"
+	},
+	exclude = {},
+})
 
 -- Mapping F1 to file manager open and close
 vim.api.nvim_set_keymap('n', '<F1>', ':NvimTreeToggle<ENTER>', { noremap = true, silent = true })
