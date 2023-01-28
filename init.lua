@@ -50,7 +50,7 @@ require('packer').startup(function()
 	}
 
 	-- treesitter
-	--use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
+	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
 	
 	-- session manager
 	use('tpope/vim-obsession')
