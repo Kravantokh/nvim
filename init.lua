@@ -124,17 +124,22 @@ require 'lspconfig'.rust_analyzer.setup({
 
 -- Transparency plugin setup
 require("transparent").setup({
-  enable = true, -- boolean: enable transparent
+	groups = { -- table: default groups
+	'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
+	'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
+	'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
+	'SignColumn', 'CursorLineNr', 'EndOfBuffer',
+  },
   extra_groups = { -- table/string: additional groups that should be cleared
     -- In particular, when you set it to 'all', that means all available groups
 
     -- example of akinsho/nvim-bufferline.lua
-    "BufferLineTabClose",
-    "BufferlineBufferSelected",
-    "BufferLineFill",
-    "BufferLineBackground",
-    "BufferLineSeparator",
-    "BufferLineIndicatorSelected",
+	"BufferLineTabClose",
+	"BufferlineBufferSelected",
+	"BufferLineFill",
+	"BufferLineBackground",
+	"BufferLineSeparator",
+	"BufferLineIndicatorSelected",
   },
   exclude = {}, -- table: groups you don't want to clear
 })
@@ -216,7 +221,7 @@ require("transparent").setup({
 		"SignColumn",
 		"CursorLineNr"
 	},
-	exclude = {},
+	exclude_groups = {},
 })
 
 -- Mapping F1 to file manager open and close
