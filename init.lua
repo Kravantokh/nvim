@@ -37,9 +37,6 @@ vim.api.nvim_command('set listchars=tab:▸ ')
 
 
 
-
-
-
 require('packer').startup(function()
 	-- Let packer manage itself
 	use 'wbthomason/packer.nvim'
@@ -76,6 +73,10 @@ require('packer').startup(function()
 	
 	-- Inline latex
 	use 'jbyuki/nabla.nvim'
+
+	-- Vimwiki
+	use 'vimwiki/vimwiki'
+
 end)
 
  -- theme setup
@@ -127,28 +128,6 @@ require 'lspconfig'.rust_analyzer.setup({
             },
         }
     }
-})
-
--- Transparency plugin setup
-require("transparent").setup({
-	groups = { -- table: default groups
-	'Normal', 'NormalNC', 'Comment', 'Constant', 'Special', 'Identifier',
-	'Statement', 'PreProc', 'Type', 'Underlined', 'Todo', 'String', 'Function',
-	'Conditional', 'Repeat', 'Operator', 'Structure', 'LineNr', 'NonText',
-	'SignColumn', 'CursorLineNr', 'EndOfBuffer',
-  },
-  extra_groups = { -- table/string: additional groups that should be cleared
-    -- In particular, when you set it to 'all', that means all available groups
-
-    -- example of akinsho/nvim-bufferline.lua
-	"BufferLineTabClose",
-	"BufferlineBufferSelected",
-	"BufferLineFill",
-	"BufferLineBackground",
-	"BufferLineSeparator",
-	"BufferLineIndicatorSelected",
-  },
-  exclude_groups = {}, -- table: groups you don't want to clear
 })
 
 -- Autocomplete config
@@ -236,6 +215,15 @@ require("transparent").setup({
 	exclude_groups = {},
 })
 
+
+-- vimwiki setup
+vim.api.nvim_command([[
+    set nocompatible
+    filetype plugin on
+    syntax on
+    let g:vimwiki_list = [{'path': '~/sync/vimwiki/', 'syntax': 'default', 'ext': '.vimwiki'}]
+]])
+
 -- Mapping F1 to file manager open and close
 vim.api.nvim_set_keymap('n', '<F1>', ':NvimTreeToggle<ENTER>', { noremap = true, silent = true })
 
@@ -266,6 +254,5 @@ end
 
 vim.api.nvim_command('nnoremap <Leader>p :lua require("nabla").popup()<CR>')
 vim.api.nvim_command('nnoremap <Leader>l :lua require("nabla").toggle_virt()<CR>')
-
 
 
