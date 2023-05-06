@@ -34,10 +34,9 @@ vim.api.nvim_command('set virtualedit=block,insert')
 vim.api.nvim_command('set list')
 -- Make tabs visible
 vim.api.nvim_command('set listchars=tab:¦ ')
-vim.api.nvim_command('set shiftwidth=0')
 
 --  Make tabs behave as they should without neovim adding mixed tabs an spaces and such nonsense. Why even is that crap on by default?!
-
+vim.api.nvim_command('set shiftwidth=0')
 
 
 
