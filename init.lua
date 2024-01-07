@@ -1,42 +1,46 @@
 -- Show line numbering vim.api.nvim_command('set number relativenumber')
 -- Highligt horizontal and vertical position of the cursor
-vim.api.nvim_command('set cursorline')
-vim.api.nvim_command('set cursorcolumn')
 
--- Make tabs be displayed as 4 space but stored and deleted as normal tabs 
-vim.api.nvim_command('set tabstop=5')
-vim.api.nvim_command('set shiftwidth=5')
-vim.api.nvim_command('set softtabstop')
+
+vim.o.cursorline = true
+vim.o.cursorcolumn = true
+
+-- Indent wrapped lines to the same level as the original line
+vim.o.breakindent = true
+
+-- Make tabs be displayed as 5 spaces but stored and deleted as normal tabs 
+vim.o.tabstop = 5
+--  Make tabs behave as they should without neovim adding mixed tabs an spaces and such nonsense. Why even is that crap on by default?!
+vim.o.shiftwidth = 0
+vim.o.softtabstop = true
 
 -- Show matches when seacrhing
-vim.api.nvim_command('set showmatch')
-vim.api.nvim_command('set nohlsearch')
+vim.o.showmatch = true
+vim.o.nohlsearch = true
+
 -- Show partial commands in the lower right corner 
-vim.api.nvim_command('set showcmd')
-vim.api.nvim_command('set number')
-vim.api.nvim_command('set number')
+vim.o.showcmd = true
+vim.o.number = true
 
 -- Enable treesitter based folding
 --vim.api.nvim_command('set foldmethod=expr')
 --vim.api.nvim_command('set foldexpr=nvim_treesitter#foldexpr()')
 
 -- Unfold everything by default
-vim.api.nvim_command('set foldlevelstart=20')
-
-vim.api.nvim_command('set relativenumber')
-vim.api.nvim_command('set number')
+vim.o.foldlevelstart = 20
+vim.o.relativenumber = true
+vim.o.number = true
 
 -- Enable sane clipboard usage
-vim.api.nvim_command('set clipboard+=unnamedplus')
+vim.o.clipboard = 'unnamedplus'
 
 -- Enable virtual edit to be able to move the cursor wherever I want (great for ASCII drawings)
-vim.api.nvim_command('set virtualedit=block,insert')
-vim.api.nvim_command('set list')
--- Make tabs visible
-vim.api.nvim_command('set listchars=tab:¦ ')
+vim.o.virtualedit = 'block,insert'
+vim.o.list = true
 
---  Make tabs behave as they should without neovim adding mixed tabs an spaces and such nonsense. Why even is that crap on by default?!
-vim.api.nvim_command('set shiftwidth=0')
+-- Make tabs visible
+vim.o.listchars = 'tab:¦ '
+
 
 local ensure_packer = function()
   local fn = vim.fn
