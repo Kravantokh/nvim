@@ -41,6 +41,10 @@ vim.o.list = true
 -- Make tabs visible
 vim.o.listchars = 'tab:¦ '
 
+-- Enable code folding based on lsp
+vim.opt.foldmethod='syntax'
+vim.opt.foldexpr='nvim_treesitter#foldexpr()'
+
 
 local ensure_packer = function()
   local fn = vim.fn
@@ -61,8 +65,10 @@ require('packer').startup(function()
 	use 'wbthomason/packer.nvim'
 
 	-- onedark theme
-	-- use('navarasu/onedark.nvim')
-	use('ful1e5/onedark.nvim')	
+	use('ful1e5/onedark.nvim')
+
+	-- Automatic window resizing
+	use { 'nvim-focus/focus.nvim' }
 
 	-- file manager
 	use {
@@ -74,9 +80,9 @@ require('packer').startup(function()
 
 	-- treesitter
 	use { 'nvim-treesitter/nvim-treesitter', run = ':TSUpdate' }
-	
+
 	-- session manager
-	use('tpope/vim-obsession')
+	use 'tpope/vim-obsession'
 
 	-- Autocomplete backend
 	use 'neovim/nvim-lspconfig'
@@ -113,7 +119,8 @@ end)
  -- theme setup
 -- require('onedark').load()
 require('onedark').setup()
-
+-- tab resizing setup
+require("focus").setup({ ui = { hybridnumber = true} })
 
  -- file manager setup
 
@@ -266,6 +273,19 @@ vim.api.nvim_set_keymap('n', '<F2>', ':Obsession<ENTER>', { noremap = true, sile
 
  -- Mapping F3 to error fixing when fix available
 vim.api.nvim_set_keymap('n', '<F3>', ':lua vim.lsp.buf.code_action()<ENTER>', { noremap = true, silent = true })
+
+-- LSP go to keymaps
+vim.api.nvim_set_keymap( 'n', 'gd', ':lua vim.lsp.buf.definition() <ENTER>', { noremap = true, silent = true } )
+vim.api.nvim_set_keymap( 'n', 'gD', ':lua vim.lsp.buf.declaration() <ENTER>', { noremap = true, silent = true } )
+vim.api.nvim_set_keymap( 'n', 'gi', ':lua vim.lsp.buf.implementation() <ENTER>', { noremap = true, silent = true } )
+vim.api.nvim_set_keymap( 'n', 'g<C-D>', ':sp <ENTER>:lua vim.lsp.buf.definition() <ENTER>', { noremap = true, silent = true } )
+
+-- Focus window management
+vim.api.nvim_set_keymap( 'n', '<C-N>', ':FocusSplitNicely<ENTER>', { noremap = true, silent = true } )
+vim.api.nvim_set_keymap( 'n', '<C-H>', ':FocusSplitLeft<ENTER>', { noremap = true, silent = true } )
+vim.api.nvim_set_keymap( 'n', '<C-L>', ':FocusSplitRight<ENTER>', { noremap = true, silent = true } )
+vim.api.nvim_set_keymap( 'n', '<C-K>', ':FocusSplitUp<ENTER>', { noremap = true, silent = true } )
+vim.api.nvim_set_keymap( 'n', '<C-J>', ':FocusSplitDown<ENTER>', { noremap = true, silent = true } )
 
 
 -- Mapping F5 to run the compile script in the opened folder according to the platform
