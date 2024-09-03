@@ -21,9 +21,10 @@ NOTE: This configuration will change over time as I establish my preferences and
 [^2]: Can be toggled on and off with `F2`. It is off by default. To return to a session use `nvim -S Session.vim` in the folder where the session tracking was done.
 [^3]: Compile and run with `F5`, compile with `<Space> + F5` run with `F6`, run current file with `<Space> + F5` provided by a `build.sh` (or `build.bat` on Windows) and a `run.sh` (`run.bat`) script files in the current working directory.
 
-# Prerequisites
+# Dependencies
 * clangd (for C&C++ error checking and possibly autocomplete) - optional
 * rust_analyzer (for rust error checking and autocomplete) - optional
+* ripgrep (for quick search aka telescope live_grep) - optional
 
 # Installation
 The repository has `nvim` as the name so that it can be directly cloned into `.config` on linux or `AppData\Local` on Windows and it will automatically have the correct name to be recognized by neovim.
