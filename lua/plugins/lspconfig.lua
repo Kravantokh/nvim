@@ -1,6 +1,6 @@
 return {
 	'neovim/nvim-lspconfig',
-	event = {"VeryLazy"},
+	event = { "BufReadPost", "BufNewFile", "VeryLazy"},
 
 	config = function()
 		require('lspconfig').clangd.setup({})
