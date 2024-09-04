@@ -47,5 +47,10 @@ end
 vim.api.nvim_set_keymap('n', '<Leader>mp', ':lua require("nabla").popup()<CR>', { noremap=true, silent=true, desc="Preview math" } )
 vim.api.nvim_set_keymap('n', '<Leader>ml', ':lua require("nabla").toggle_virt()<CR>', { noremap=true, silent=true, desc="Toggle unicode math" } )
 
+-- Db stuff
+vim.api.nvim_set_keymap('n', '<Leader>oq', ':lua require("dbee").toggle()<CR>', { noremap=true, silent=true, desc="Query editor" } )
+vim.api.nvim_set_keymap('n', '<Leader>rq', 'BB', { desc="Query editor" } )
+vim.api.nvim_set_keymap('v', '<Leader>rq', 'BB', { desc="Query editor" } )
+
 -- which-key
-	vim.api.nvim_set_keymap( 'n', '<leader>?', ':lua require("which-key").show({ global = false })<CR>', { noremap = true, silent=true, desc="Show buffer commands" } );
+vim.api.nvim_set_keymap( 'n', '<leader>?', ':lua require("which-key").show({ global = false })<CR>', { noremap = true, silent=true, desc="Show buffer commands" } );
