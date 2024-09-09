@@ -4,11 +4,7 @@ return {
 		dependencies = { 'L3MON4D3/LuaSnip' },
 		config = function()
 			local cmp = require('cmp')
-			vim.opt.pumheight = 7
 			cmp.setup({
-				completion = {
-					keyword_length = 3 -- Minimum 3 characters have to be typed for completion to happpen
-				},
 				snippet = {
 					expand = function(args)
 						require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
