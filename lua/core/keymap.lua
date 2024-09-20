@@ -2,6 +2,9 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
+-- Make terminal work sanely
+vim.keymap.set('t', '<ESC>', "<C-\\><C-n>", {silent = true})
+
 -- Mapping F1 to file manager open and close
 vim.api.nvim_set_keymap('n', '<F1>', ':NvimTreeToggle<ENTER>', { noremap = true, silent = true, desc="Toggle filetree" })
 
@@ -54,3 +57,4 @@ vim.api.nvim_set_keymap('v', '<Leader>rq', 'BB', { desc="Query editor" } )
 
 -- which-key
 vim.api.nvim_set_keymap( 'n', '<leader>?', ':lua require("which-key").show({ global = false })<CR>', { noremap = true, silent=true, desc="Show buffer commands" } );
+
