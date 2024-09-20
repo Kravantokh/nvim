@@ -1,6 +1,6 @@
 return {
 
-	{ 'ful1e5/onedark.nvim', priority=1000, config = { require('onedark').setup() } },
+	{ 'ful1e5/onedark.nvim', priority=1000, config = function() require('onedark').setup() end },
 	{ 'xiyaowong/nvim-transparent',
 		config = function()
 			require("transparent").setup({
