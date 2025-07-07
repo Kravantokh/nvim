@@ -30,3 +30,7 @@ NOTE: This configuration will change over time as I establish my preferences and
 The repository has `nvim` as the name so that it can be directly cloned into `.config` on linux or `AppData\Local` on Windows and it will automatically have the correct name to be recognized by neovim.
 
 If you want to make neovim transparent run `:TransparentEnable` and then it will retain that transparency has been turned on.
+
+# Branches
+
+This repository has multiple branches. The `base` branch is a minimalist version of my configuration, whereas the `ide` is a more feature-rich version. The `ide-job` version is a version that has some job-specific stuff added to `ide`. The default branch is `ide`. If you wish to use the minimal version clone with the `-b base` flag.
