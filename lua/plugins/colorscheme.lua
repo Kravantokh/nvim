@@ -35,7 +35,8 @@ return {
 					"LineNr",
 					"NonText",
 					"SignColumn",
-					"CursorLineNr"
+					"CursorLineNr",
+					"FloatBorder"
 				},
 				exclude_groups = {},
 			})
