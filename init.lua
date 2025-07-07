@@ -26,6 +26,9 @@ vim.api.nvim_command('set foldlevelstart=20')
 vim.api.nvim_command('set relativenumber')
 vim.api.nvim_command('set number')
 
+-- Enable sane clipboard usage
+vim.api.nvim_command('set clipboard+=unnamedplus')
+
 
 
 
@@ -60,6 +63,12 @@ require('packer').startup(function()
 	use 'hrsh7th/cmp-nvim-lsp' -- LSP source for nvim-cmp
 	use 'saadparwaiz1/cmp_luasnip' -- Snippets source for nvim-cmp
 	use 'L3MON4D3/LuaSnip' -- Snippets plugin
+	
+	-- Transparency plugin
+	use 'xiyaowong/nvim-transparent'
+	
+	-- Inline latex
+	use 'jbyuki/nabla.nvim'
 end)
 
  -- theme setup
@@ -91,6 +100,44 @@ require('nvim-treesitter.configs').setup {
 
 -- Language server setup
 require'lspconfig'.clangd.setup{}
+require 'lspconfig'.rust_analyzer.setup({
+    on_attach=on_attach,
+    settings = {
+        ["rust-analyzer"] = {
+            imports = {
+                granularity = {
+                    group = "module",
+                },
+                prefix = "self",
+            },
+            cargo = {
+                buildScripts = {
+                    enable = true,
+                },
+            },
+            procMacro = {
+                enable = true
+            },
+        }
+    }
+})
+
+-- Transparency plugin setup
+require("transparent").setup({
+  enable = true, -- boolean: enable transparent
+  extra_groups = { -- table/string: additional groups that should be cleared
+    -- In particular, when you set it to 'all', that means all available groups
+
+    -- example of akinsho/nvim-bufferline.lua
+    "BufferLineTabClose",
+    "BufferlineBufferSelected",
+    "BufferLineFill",
+    "BufferLineBackground",
+    "BufferLineSeparator",
+    "BufferLineIndicatorSelected",
+  },
+  exclude = {}, -- table: groups you don't want to clear
+})
 
 -- Autocomplete config
 local luasnip = require 'luasnip'
@@ -167,6 +214,8 @@ elseif vim.fn.has('win32') == 1 then
 
 end
 
+vim.api.nvim_command('nnoremap <Leader>p :lua require("nabla").popup()<CR>')
+vim.api.nvim_command('nnoremap <Leader>l :lua require("nabla").toggle_virt()<CR>')
 
 
 
