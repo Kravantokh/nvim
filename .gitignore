@@ -2,3 +2,4 @@ autoload/
 plugin/
 Session.vim
 lazy-lock.json
+lua/plugins/dev.lua
