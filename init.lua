@@ -29,6 +29,13 @@ vim.api.nvim_command('set number')
 -- Enable sane clipboard usage
 vim.api.nvim_command('set clipboard+=unnamedplus')
 
+-- Enable virtual edit to be able to move the cursor wherever I want (great for ASCII drawings)
+vim.api.nvim_command('set virtualedit=block,insert')
+vim.api.nvim_command('set list')
+vim.api.nvim_command('set listchars=tab:▸ ')
+-- vim.api.nvim_command('set listchars=tab:▸·')
+
+
 
 
 
