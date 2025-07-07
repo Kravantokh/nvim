@@ -16,7 +16,7 @@ vim.o.softtabstop = true
 
 -- Show matches when seacrhing
 vim.o.showmatch = true
-vim.o.nohlsearch = true
+vim.o.hlsearch = false
 
 -- Show partial commands in the lower right corner 
 vim.o.showcmd = true
