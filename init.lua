@@ -140,7 +140,7 @@ require("transparent").setup({
 	"BufferLineSeparator",
 	"BufferLineIndicatorSelected",
   },
-  exclude = {}, -- table: groups you don't want to clear
+  exclude_groups = {}, -- table: groups you don't want to clear
 })
 
 -- Autocomplete config
