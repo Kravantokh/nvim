@@ -70,6 +70,9 @@ require('packer').startup(function()
 	-- Automatic window resizing
 	use { 'nvim-focus/focus.nvim' }
 
+	-- Context info (lines showing what scopes you are in)
+	use { 'wellle/context.vim' }
+
 	-- file manager
 	use {
 		'kyazdani42/nvim-tree.lua',
@@ -95,6 +98,7 @@ require('packer').startup(function()
 	
 	-- Transparency plugin
 	use 'xiyaowong/nvim-transparent'
+
 	-- Inline latex
 	use 'jbyuki/nabla.nvim'
 
