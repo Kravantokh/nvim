@@ -6,23 +6,24 @@ I use this configuration on a laptop and a pc and the reason for making this rep
 NOTE: This configuration will change over time as I establish my preferences and add all the features I need.
 
 # Features
-* Package manager[^1] (packer)
-* File manager (nvim-tree)
+* Package manager (lazy)
+* Lazy plugin loading for fast startup time
+* File manager[^1] (nvim-tree)
 * Session tracking[^2] (Obsession)
 * Compile/run[^3]
 * Syntax Highlighting (Treesitter)
 * Code folding (Treesitter)
-* Real-time error-checking for C/C++ (clangd)
+* Real-time error-checking for C&C++ (clangd)
 * Transparency
 * Vimwiki
 
 [^1]: `F1` can be used to toggle the file tree on and off.
 [^2]: Can be toggled on and off with `F2`. It is off by default. To return to a session use `nvim -S Session.vim` in the folder where the session tracking was done.
-[^3]: Compilation with `F5`, run with `F6` provided by a `compile.sh` (or `compile.bat` on Windows) and a `run.sh` (`run.bat`) script files in the parent directory of the project.
+[^3]: Compile and run with `F5`, compile with `<Space> + F5` run with `F6`, run current file with `<Space> + F5` provided by a `build.sh` (or `build.bat` on Windows) and a `run.sh` (`run.bat`) script files in the current working directory.
 
 # Prerequisites
-* Packer (https://github.com/wbthomason/packer.nvim) - must be installed
-* clangd (for error checking and possibly autocomplete) - optional
+* clangd (for C&C++ error checking and possibly autocomplete) - optional
+* rust_analyzer (for rust error checking and autocomplete) - optional
 
 # Installation
 The repository has `nvim` as the name so that it can be directly cloned into `.config` on linux or `AppData\Local` on Windows and it will automatically have the correct name to be recognized by neovim.
