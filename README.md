@@ -11,8 +11,10 @@ NOTE: This configuration will change over time as I establish my preferences and
 * Session tracking[^2] (Obsession)
 * Compile/run[^3]
 * Syntax Highlighting (Treesitter)
-* Code folding based (Treesitter)
+* Code folding (Treesitter)
 * Real-time error-checking for C/C++ (clangd)
+* Transparency
+* Vimwiki
 
 [^1]: `F1` can be used to toggle the file tree on and off.
 [^2]: Can be toggled on and off with `F2`. It is off by default. To return to a session use `nvim -S Session.vim` in the folder where the session tracking was done.
@@ -26,4 +28,3 @@ NOTE: This configuration will change over time as I establish my preferences and
 The repository has `nvim` as the name so that it can be directly cloned into `.config` on linux or `AppData\Local` on Windows and it will automatically have the correct name to be recognized by neovim.
 
 If you want to make neovim transparent run `:TransparentEnable` and then it will retain that transparency has been turned on.
-
