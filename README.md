@@ -18,4 +18,4 @@ NOTE: This configuration will change over time as I establish my preferences and
 [^3]: Compilation with `F5`, run with `F6` provided by a `compile.sh` (or `compile.bat` on Windows) and a `run.sh` (`run.bat`) script files in the parent directory of the project.
 
 # Installation
-The repository has `nvim` as the name so that it can be directly cloned into `.config` on linux or `Roaming\Local` on Windows and it will automatically have the correct name to be recognized by neovim.
+The repository has `nvim` as the name so that it can be directly cloned into `.config` on linux or `AppData\Local` on Windows and it will automatically have the correct name to be recognized by neovim.
