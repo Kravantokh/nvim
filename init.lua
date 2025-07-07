@@ -32,8 +32,12 @@ vim.api.nvim_command('set clipboard+=unnamedplus')
 -- Enable virtual edit to be able to move the cursor wherever I want (great for ASCII drawings)
 vim.api.nvim_command('set virtualedit=block,insert')
 vim.api.nvim_command('set list')
-vim.api.nvim_command('set listchars=tab:▸ ')
--- vim.api.nvim_command('set listchars=tab:▸·')
+-- Make tabs visible
+vim.api.nvim_command('set listchars=tab:¦ ')
+vim.api.nvim_command('set shiftwidth=0')
+
+--  Make tabs behave as they should without neovim adding mixed tabs an spaces and such nonsense. Why even is that crap on by default?!
+
 
 
 
