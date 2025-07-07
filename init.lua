@@ -38,9 +38,21 @@ vim.api.nvim_command('set listchars=tab:¦ ')
 --  Make tabs behave as they should without neovim adding mixed tabs an spaces and such nonsense. Why even is that crap on by default?!
 vim.api.nvim_command('set shiftwidth=0')
 
+local ensure_packer = function()
+  local fn = vim.fn
+  local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+  if fn.empty(fn.glob(install_path)) > 0 then
+    fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+    vim.cmd [[packadd packer.nvim]]
+    return true
+  end
+  return false
+end
 
+local packer_bootstrap = ensure_packer()
 
 require('packer').startup(function()
+
 	-- Let packer manage itself
 	use 'wbthomason/packer.nvim'
 
@@ -73,14 +85,26 @@ require('packer').startup(function()
 	
 	-- Transparency plugin
 	use 'xiyaowong/nvim-transparent'
-	
 	-- Inline latex
 	use 'jbyuki/nabla.nvim'
 
 	-- Vimwiki
 	use 'vimwiki/vimwiki'
 
+	-- Prerequisite for sedna
+	use 'inkarkat/vim-SyntaxRange'
+
+	use 'jbyuki/instant.nvim'
+
+	-- Development
+	use "~/sync/prog/nvim_plugin_dev/sedna.nvim/"
+	use "~/sync/prog/nvim_plugin_dev/"
+
+	if packer_bootstrap then
+		require('packer').sync()
+	end
 end)
+
 
  -- theme setup
 -- require('onedark').load()
@@ -226,6 +250,9 @@ vim.api.nvim_command([[
     syntax on
     let g:vimwiki_list = [{'path': '~/sync/vimwiki/', 'syntax': 'default', 'ext': '.vimwiki'}]
 ]])
+
+-- instant username setting for group editing
+vim.api.nvim_command( 'let g:instant_username="kravantokh"' )
 
 -- Mapping F1 to file manager open and close
 vim.api.nvim_set_keymap('n', '<F1>', ':NvimTreeToggle<ENTER>', { noremap = true, silent = true })
